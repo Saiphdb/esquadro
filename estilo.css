@@ -1,0 +1,57 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Square+Peg&family=Updock&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada&family=Square+Peg&family=Updock&display=swap');
+@font-face {
+    font-family: "Edds";
+    src: url("Edd's Font.ttf") format("truetype");
+    /*opentype(otf),truetype(ttf),etc*/
+}
+
+h1{
+
+    color: #87CFDE;
+    text-align: center;
+
+}
+
+
+
+body{
+
+    font-family: 'Radio Canada';
+    font-size: 18px;
+    line-height: 0.5;
+    background: #283538;
+    
+}
+
+.quase{
+    height: auto;
+    width: 470px;
+    background: #4091a5;
+    float: left;
+    border-radius: 10px;
+}
+
+.tudo{
+    /*align-items: center;*/
+    margin-top:0;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+h2{
+    text-align: center;
+}
+
+
+.nao:link{
+    color: #8a2231;
+}
+
+.nao:visited{
+    color: #5f141b;
+}
+
