@@ -1,0 +1,170 @@
+import requests
+from bs4 import BeautifulSoup
+import time
+
+links_neox = [
+
+
+
+]
+
+painel_neox = {
+"o above-all-gods":"n2 above-all-gods1",
+"o the-elixir-of-the-sun":"n2 elixir-of-the-sun1",
+"x overgeared-remake":"n o2",
+"o leveling-with-the-gods":"n leveling-with-the-gods1",
+"o rankers-return-2021":"n rankers-return1",
+"o reformation-of-the-deadbeat-noble":"n reformation-of-the-deadbeat-noble1",
+"o release-that-witch":"n release-that-witch1",
+"o return-of-the-frozen-player":"n return-of-the-frozen-player1",
+"x sss-class-suicide-hunter":"n sss-crh1",
+"o sss-class-gacha-hunter":"n sss-class-gacha-hunter1",
+"o second-life-ranker":"n second-life-ranker1",
+"o seoul-station-druid":"n seoul-station-druid1",
+"x solo-max-level-newbie":"n solo-max-newbie1",
+"o the-beginning-after-the-end":"n ocdf2",
+"o the-book-eating-magician":"n the-book-eating-magician1",
+"o omniscient-readers-viewpoint":"n omniscient-readers-viewpoint1",
+"o the-player-that-cant-level-up":"n the-player-that-cant-level-up1",
+"o the-advanced-player-of-the-tutorial-tower":"n the-tutorial-tower-of-the-advanced-player1",
+"x the-max-level-hero-has-returned":"n the-max-leveled-hero-will-return1",
+"x tomb-raider-king":"n tomb-raider-king1",
+"o unordinary":"n unordinary1",
+"o your-talent-is-mine":"n your-talent-is-mine1",
+"o the-god-of-high-school":"n the-god-of-highschool1"
+}
+
+painel_golden = {
+"x eleceed":"g eleceed-br-gm",
+"o god-of-blackfield":"g god-of-blackfield",
+"o guard-pass":"g guard-pass",
+"x how-to-fight":"g how-to-fight-gm",
+"x iris-lady-with-a-smartphone":"g iris-lady-with-a-smartphone-gm",
+"x jungle-juice":"g jungle-juice-gm",
+"x lookism":"g lookism-gm",
+"o tales-of-demons-and-gods":"g tales-of-demons-and-gods-gm",
+"o tower-of-god-parte-3":"g tower-of-god-season-3-br-gm",
+"o weak-hero":"g weak-hero-gm",
+"o wind-breaker":"g wind-breaker-gm"
+}
+
+golden = "https://goldenmanga.top/mangabr/"
+neox = "https://neoxscans.net/neo/manga/"
+neox2 = "https://neoxscans.net/serie/"
+
+
+def cap_golden(url):
+    resposta = requests.get(url)
+    site = BeautifulSoup(resposta.content,"html.parser")
+    post = site.find("li", attrs={"class":"row"})
+    cap = post.find("div", attrs={"class":"col-sm-5"})
+    return cap.text.split("(")[0].split()[1]
+
+def cap_yabu(url):
+
+    resposta = requests.get(url)
+    site = BeautifulSoup(resposta.content,"html.parser")
+    post = site.find("div", attrs={"class":"single-chapter"})
+    titulo = post.find("a")
+    return titulo.text.split()[1]
+
+print()
+
+
+def stringar(painel):
+
+    lista = []
+
+    for k,v in painel.items():
+        dmca = k.split()[0]
+        chave = k.split()[1]
+        tipo = v.split()[0]
+        nome = v.split()[1]
+        cap = ""
+        site = "https://neoxscans.net/serie/"
+        yab = ""
+        if dmca == "o":
+            yab = cap_yabu("https://yabutoons.com/webtoon/"+chave)
+        else:
+            yab = "X"
+        if tipo == "g":
+            site = golden
+            cap = cap_golden(site+nome)
+        elif tipo == "n":
+            site = neox
+        time.sleep(1)
+        lista.append(f"""<p class="pp"><a href="https://yabutoons.com/wp-admin/edit.php?category_name={chave}"  target="_blank">[{yab}/{cap}] </a><a href="{site+nome}" target="_blank" rel="external">{chave}</a></p>""")
+    return "".join(lista)
+
+#neox_string = stringar(painel_neox)
+
+#golden_string = stringar(painel_golden)
+
+u = ("""<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancamentos Yabutoon</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Square+Peg&family=Updock&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Radio+Canada&family=Square+Peg&family=Updock&display=swap');
+        @font-face {
+            font-family: "Edds";
+            src: url("Edd's Font.ttf") format("truetype");
+            /*opentype(otf),truetype(ttf),etc*/
+        }
+        body{
+
+            font-family: 'Radio Canada';
+            font-size: 20px;
+            line-height: 0.5;
+            background: #263137;
+            
+        }
+
+        .esq{
+
+            height: auto;
+            width: 470px;
+            background: rgb(128, 128, 128);
+            float: left;
+        }
+
+        .dir{
+
+            height: auto;
+            width: 470px;
+            background: rgb(133, 133, 133);
+            float: left;
+        }
+        .tudo{
+            /*align-items: center;*/
+            margin-top:0;
+            justify-content: center;
+            display: flex;
+            flex-direction: row;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <h1>Lancamentos Yabutoon</h1>
+    <div class="tudo">
+    <div class="dir">
+    <h2>Neox</h2>"""
+    +neox_string+"""
+</div><div class="esq">
+    <h2>Golden</h2>"""
+    +golden_string+
+    """</div></div>
+    </body>
+</html>""")

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancamentos Yabutoon</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Square+Peg&family=Updock&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Radio+Canada&family=Square+Peg&family=Updock&display=swap');
+        @font-face {
+            font-family: "Edds";
+            src: url("Edd's Font.ttf") format("truetype");
+            /*opentype(otf),truetype(ttf),etc*/
+        }
+        body{
+
+            font-family: 'Radio Canada';
+            font-size: 20px;
+            line-height: 0.5;
+            background: #263137;
+            
+        }
+
+        .esq{
+
+            height: auto;
+            width: 470px;
+            background: rgb(128, 128, 128);
+            float: left;
+        }
+
+        .dir{
+
+            height: auto;
+            width: 470px;
+            background: rgb(133, 133, 133);
+            float: left;
+        }
+        .tudo{
+            /*align-items: center;*/
+            margin-top:0;
+            justify-content: center;
+            display: flex;
+            flex-direction: row;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <h1>Lancamentos Yabutoon</h1>
+    <div class="tudo">
+    <div class="dir">
+    <h2>Neox</h2>
+    
+        {{coisas_neox | safe}}
+
+    </div><div class="esq">
+    <h2>Golden</h2>
+    
+        {{coisas_golden | safe}}
+
+    </div></div>
+    </body>
+</html>
